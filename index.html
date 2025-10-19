@@ -5,15 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WWVGen</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="script.js" defer></script>
+    <script src="WWV.js" defer></script>
     <script src="http://unpkg.com/tone"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentTimeSpan = document.getElementById("current-time");
+            function updateTime() {
+                const now = new Date();
+                currentTimeSpan.textContent = now.toLocaleTimeString();
+            }
+            setInterval(updateTime, 1000);
+            updateTime();
+        });
+    </script>
 </head>
 <body class="p-4 font-sans">
     <h1 class="text-4xl font-bold mb-5">WWV Generator</h1>
     <p class="mb-4">Generate WWV time signals using the Tone.js library.</p>
     <p class="mb-4">This button will play the WWV BCD signal for the current minute.</p>
+    <p class="mb-2">Currently <b>only</b> supports the BCD signal, I will implement everything else later</p>
+    <span class="text-white text-sm bg-gray-800 rounded-md p-1">Current Time: <span id="current-time"></span></span>
     <div id="controls">
-        <button id="start" class="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-700 cursor-pointer">Start</button>
+        <button id="start" class="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-700 cursor-pointer mt-2">Start</button>
     </div>
 </body>
 </html>
