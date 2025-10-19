@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WWVGen</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="script.js" defer></script>
     <script src="http://unpkg.com/tone"></script>
 </head>
-<body>
-    <h1>WWV Generator</h1>
-    <p>Generate WWV time signals using the Tone.js library.</p>
+<body class="p-4 font-sans">
+    <h1 class="text-4xl font-bold mb-5">WWV Generator</h1>
+    <p class="mb-4">Generate WWV time signals using the Tone.js library.</p>
+    <p class="mb-4">This button will play the WWV BCD signal for the current minute.</p>
     <div id="controls">
-        <button id="start">Start</button>
+        <button id="start" class="bg-gray-900 text-white py-2 px-4 rounded-md">Start</button>
     </div>
 </body>
 </html>
