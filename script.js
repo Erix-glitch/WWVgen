@@ -5,6 +5,7 @@ const FREQ = 100;
 const subOsc = new Tone.Oscillator(FREQ, "sine");
 const subGain = new Tone.Gain(0).toDestination();
 subOsc.connect(subGain).start();
+let isPlaying = false;
 
 function dayOfYearUTC(d) {
   const start = Date.UTC(d.getUTCFullYear(), 0, 1);
@@ -85,8 +86,23 @@ function buildWWV() {
   Tone.Transport.loopEnd = "60s";
 }
 
-document.getElementById('start').addEventListener('click', async () => {
+const startButton = document.getElementById('start');
+
+startButton.addEventListener('click', async () => {
+  if (isPlaying) {
+    Tone.Transport.stop();
+    Tone.Transport.cancel(0);
+    subGain.gain.setValueAtTime(LOW, Tone.now());
+    startButton.textContent = "Start";
+    startButton.classList.remove('bg-red-500', 'hover:bg-red-800');
+    isPlaying = false;
+    return;
+  }
+
   await Tone.start();
   buildWWV();
+  startButton.textContent = "Stop";
+  startButton.classList.add('bg-red-500', 'hover:bg-red-800');
   Tone.Transport.start("+0.1");
+  isPlaying = true;
 });
